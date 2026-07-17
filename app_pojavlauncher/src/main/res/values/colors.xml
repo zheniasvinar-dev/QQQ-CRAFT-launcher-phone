@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- QQQ-CRAFT Brand Colors -->
+    <color name="control_button_color">#4C4CAF50</color>
+    <color name="control_button_pressed_color">#4D388E3C</color>
+
+    <!-- Main UI Colors -->
+    <color name="qqqcraft_green">#4CAF50</color>
+    <color name="qqqcraft_green_dark">#388E3C</color>
+    <color name="qqqcraft_green_light">#8BC34A</color>
+    <color name="qqqcraft_green_accent">#66BB6A</color>
+    <color name="qqqcraft_lime">#CDDC39</color>
+
+    <!-- Background Colors -->
+    <color name="minebutton_color">#66BB6A</color>
+    <color name="background_app">#1B1B1F</color>
+    <color name="divider">@color/background_overlay</color>
+    <color name="background_overlay">#2D2D35</color>
+    <color name="background_status_bar">#121215</color>
+    <color name="background_bottom_bar">#1F1F24</color>
+    <color name="background_card">#252530</color>
+    <color name="icon_outline_color">#FFFFFF</color>
+
+    <!-- Text Colors -->
+    <color name="primary_text">#FFFFFF</color>
+    <color name="secondary_text">#B2B2B2</color>
+    <color name="accent_text">#8BC34A</color>
+
+    <!-- Play Button Gradient -->
+    <color name="play_button_start">#4CAF50</color>
+    <color name="play_button_end">#8BC34A</color>
+    <color name="play_button_pressed">#388E3C</color>
+
+    <!-- Selection/Active Colors -->
+    <color name="selected_highlight">#334CAF50</color>
+    <color name="active_indicator">#4CAF50</color>
+</resources>
