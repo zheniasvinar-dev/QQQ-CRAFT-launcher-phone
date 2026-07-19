@@ -10,6 +10,19 @@
     android:orientation="vertical"
     android:background="@color/background_app">
 
+    <!-- QQQ-CRAFT Background Image -->
+    <ImageView
+        android:id="@+id/qqqcraft_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:alpha="0.15"
+        android:src="@drawable/ic_qqqcraft_logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <!-- QQQ-CRAFT Server Banner -->
     <LinearLayout
         android:id="@+id/qqqcraft_banner"

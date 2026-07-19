@@ -138,8 +138,9 @@ public class Instances {
     private static void createFirstTimeInstance() throws IOException {
         internalCreateInstance((instance)-> {
             instance.sharedData = true;
-            instance.versionId = "1.12.2";
-        }, null);
+            instance.versionId = "1.21.1";
+            instance.name = "QQQ-CRAFT";
+        }, "qqqcraft");
     }
 
     /**
@@ -149,8 +150,9 @@ public class Instances {
     public static Instance createDefaultInstance() throws IOException {
         return createInstance((instance)-> {
             instance.sharedData = true;
-            instance.versionId = Instance.VERSION_LATEST_RELEASE;
-        }, null);
+            instance.versionId = "1.21.1";
+            instance.name = "QQQ-CRAFT";
+        }, "qqqcraft");
     }
 
     /**
