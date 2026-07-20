@@ -30,14 +30,70 @@ jobs:
 
       - name: Install Android SDK components
         run: |
-          yes | sdkmanager --licenses > /dev/null || true
-          sdkmanager "platforms;android-36" "build-tools;36.0.0" "platform-tools" "cmake;3.22.1" "ndk;29.0.14206865"
+          set -ex
+          df -h /
+          find_sdkmanager() {
+            for p in \
+              "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
+              "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" \
+              /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager \
+              /opt/android-sdk/cmdline-tools/latest/bin/sdkmanager \
+              "$ANDROID_HOME/tools/bin/sdkmanager" \
+              "$ANDROID_SDK_ROOT/tools/bin/sdkmanager" ; do
+              [ -x "$p" ] && { echo "$p"; return 0; }
+            done
+            return 1
+          }
+          SDKMANAGER=$(find_sdkmanager || true)
+          if [ -z "$SDKMANAGER" ]; then
+            export ANDROID_HOME="$HOME/android-sdk"
+            mkdir -p "$ANDROID_HOME/cmdline-tools"
+            curl -sSL -o /tmp/cmdtools.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+            unzip -q /tmp/cmdtools.zip -d "$ANDROID_HOME/cmdline-tools"
+            mv "$ANDROID_HOME/cmdline-tools/cmdline-tools" "$ANDROID_HOME/cmdline-tools/latest"
+            rm /tmp/cmdtools.zip
+            SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          fi
+          export ANDROID_HOME="${ANDROID_HOME:-$(dirname "$(dirname "$(dirname "$SDKMANAGER")")")}"
+          export ANDROID_SDK_ROOT="$ANDROID_HOME"
+          echo "ANDROID_HOME=$ANDROID_HOME" >> "$GITHUB_ENV"
+          echo "ANDROID_SDK_ROOT=$ANDROID_HOME" >> "$GITHUB_ENV"
+          echo "$(dirname "$SDKMANAGER")" >> "$GITHUB_PATH"
+          yes | "$SDKMANAGER" --licenses > /dev/null || true
+          "$SDKMANAGER" "platforms;android-36" "build-tools;36.0.0" "platform-tools" "cmake;3.22.1" "ndk;29.0.14206865"
+          df -h /
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
       - name: Build fullDebug APK
-        run: ./gradlew assembleFullDebug --stacktrace
+        id: assemble
+        run: |
+          mkdir -p build-logs
+          ( ./gradlew assembleFullDebug --stacktrace 2>&1 || touch BUILD_FAILED ) | tee build-logs/build.log
+
+      - name: Publish build log to git
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          BRANCH="build-logs-$(echo "${GITHUB_REF_NAME}" | tr '/' '-')"
+          git checkout --orphan "$BRANCH"
+          git rm -rf . > /dev/null 2>&1 || true
+          mkdir -p log
+          cp build-logs/build.log "log/build-run${GITHUB_RUN_NUMBER}.log"
+          if [ -f BUILD_FAILED ]; then echo "BUILD FAILED" > log/STATUS; else echo "BUILD OK" > log/STATUS; fi
+          git add log
+          git commit -m "Build log (run #${GITHUB_RUN_NUMBER})" > /dev/null
+          git push -f origin "$BRANCH:$BRANCH" || true
+        shell: bash
+
+      - name: Fail build step if needed
+        if: always()
+        run: |
+          if [ -f BUILD_FAILED ]; then echo "Gradle build failed (see build-logs-* branch)"; exit 1; fi
 
       - name: Copy APK to out/
         run: |
