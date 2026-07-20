@@ -1,0 +1,26 @@
+QQQ-CRAFT Launcher
+
+Український лаунчер Minecraft для сервера QQQ-CRAFT.
+Базується на MojoLauncher (PojavLauncher).
+
+QQQ-CRAFT — український SMP сервер із живою взаємодією та спільним розвитком.
+
+Сервер: play.qqq-craft.top
+Версія: 1.21.1 (Java + Bedrock)
+
+Сайт: https://qqq-craft.top
+Discord: https://discord.gg/WWYcBQ2Jhr
+Telegram: https://t.me/qqqua_tg
+
+Функції сервера:
+• Виживання з покращеними механіками
+• Унікальні боси з власними умовами виклику
+• Економіка на головах та покращена торгівля
+• Плащі, перки та кастомні предмети
+• Гільдії та спільнота
+• Щотижнева газета The QQQ Times
+• Фонова музика для подорожей
+• Покращена риболовля та квести
+
+Розробка лаунчера: zheniasvinar-dev
+Сервер розробка: QQQ-CRAFT Team

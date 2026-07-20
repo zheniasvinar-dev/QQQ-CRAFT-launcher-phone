@@ -1,0 +1,43 @@
+{
+  "server": {
+    "name": "QQQ-CRAFT",
+    "ip": "play.qqq-craft.top",
+    "port": 25565,
+    "version": "1.21.1",
+    "type": "java+bedrock",
+    "description": "Український SMP сервер із живою взаємодією та спільним розвитком",
+    "features": [
+      "Виживання з покращеними механіками",
+      "Унікальні боси",
+      "Економіка на головах",
+      "Плащі та перки",
+      "Гільдії",
+      "Щотижнева газета The QQQ Times",
+      "Фонова музика",
+      "Покращена риболовля та квести"
+    ],
+    "links": {
+      "website": "https://qqq-craft.top",
+      "discord": "https://discord.gg/WWYcBQ2Jhr",
+      "telegram": "https://t.me/qqqua_tg",
+      "rules": "https://qqq-craft.top/rules/",
+      "game": "https://qqq-craft.top/game/",
+      "leaderboard": "https://qqq-craft.top/leaderboard/",
+      "community": "https://qqq-craft.top/community/"
+    },
+    "recommended_modpack": "fabric-loader-0.18.4-1.21.11",
+    "modpack_url": "https://qqq-craft.top/launcher/get/?modpack=fabric-loader-0.18.4-1.21.11&zip=true"
+  },
+  "launcher": {
+    "name": "QQQ-CRAFT Launcher",
+    "version": "1.0.0",
+    "based_on": "MojoLauncher v3_openjdk",
+    "primary_language": "uk",
+    "theme": {
+      "primary_color": "#4CAF50",
+      "accent_color": "#8BC34A",
+      "background_color": "#1B1B1F",
+      "card_color": "#252530"
+    }
+  }
+}
