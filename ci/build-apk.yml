@@ -19,6 +19,8 @@ jobs:
       - name: Checkout (with submodules)
         uses: actions/checkout@v4
         with:
+          # main у цьому репозиторії не містить коду проєкту — чекаутимо гілку з кодом
+          ref: arena/019f7f2d-qqq-craft-launcher-phone
           submodules: recursive
           fetch-depth: 0
 
